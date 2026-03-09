@@ -547,3 +547,60 @@ BestPracticeScreen.kt
 7. **Test with Preview** - Use `@Preview` annotation
 8. **Handle padding** - Always use Scaffold's padding values
 
+---
+
+## ⚠️ Common Mistake: Duplicate Theme Wrapping
+
+**DON'T DO THIS:**
+```kotlin
+// MainActivity
+setContent {
+    ComposeTheme {  // ✅ Theme here
+        MyScreen()
+    }
+}
+
+// MyScreen.kt
+@Composable
+fun MyScreen() {
+    ComposeTheme {  // ❌ DON'T wrap again!
+        Scaffold { ... }
+    }
+}
+```
+
+**DO THIS INSTEAD:**
+```kotlin
+// MainActivity
+setContent {
+    ComposeTheme {  // ✅ Theme ONLY at root
+        MyScreen()
+    }
+}
+
+// MyScreen.kt
+@Composable
+fun MyScreen() {
+    // ✅ No theme wrapper needed
+    Scaffold { ... }
+}
+```
+
+**Why?**
+- Theme should be applied **once at the root level** (Activity or NavHost)
+- Screen composables inherit the theme automatically
+- Duplicate wrapping is redundant and can cause confusion
+- Keeps screens reusable and independent of theming
+
+**Navigation Example:**
+```kotlin
+setContent {
+    ComposeTheme {  // ✅ Theme once here
+        NavHost(navController, startDestination = "home") {
+            composable("home") { HomeScreen() }  // No theme wrapper
+            composable("profile") { ProfileScreen() }  // No theme wrapper
+        }
+    }
+}
+```
+

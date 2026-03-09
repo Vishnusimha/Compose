@@ -122,7 +122,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.vishnu.compose.ui.theme.ComposeTheme
 import kotlinx.coroutines.launch
 
 /**
@@ -149,9 +148,8 @@ fun BestPracticeScreen() {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showDialog by remember { mutableStateOf(false) }
 
-    ComposeTheme {
-        // Layer 1: Navigation Drawer (Side Drawer)
-        ModalNavigationDrawer(
+    // Layer 1: Navigation Drawer (Side Drawer)
+    ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
                 DrawerContent(
@@ -279,7 +277,6 @@ fun BestPracticeScreen() {
                 }
             }
         }
-    }
 }
 
 // ============================================
