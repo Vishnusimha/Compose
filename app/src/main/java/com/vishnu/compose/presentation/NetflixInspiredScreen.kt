@@ -1,5 +1,37 @@
 package com.vishnu.compose.presentation
 
+/*
+ UI Hierarchy (Top -> Bottom)
+
+ Surface (screen background)
+   -> Scaffold (screen structure)
+      -> TopAppBar
+         -> Text("StreamX")
+         -> IconButton
+            -> Icon(Notifications)
+      -> LazyColumn (scrollable content)
+         -> item: HeroBanner
+            -> Box
+               -> Column
+                  -> Text("The Silent Case")
+                  -> Text("Crime • Thriller • 2h 08m")
+                  -> Row
+                     -> Button(Play)
+                        -> Icon(PlayArrow)
+                        -> Spacer
+                        -> Text("Play")
+                     -> Button(My List)
+                        -> Text("My List")
+         -> items: CategoryRow [repeated]
+            -> Column
+               -> Text(row.title)
+               -> LazyRow
+                  -> PosterCard [repeated]
+                     -> Card
+                        -> Box
+                           -> Text(title)
+*/
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -120,10 +152,13 @@ fun NetflixInspiredScreen() {
         )
     }
 
+    // Screen hierarchy root:
+    // Surface -> Scaffold -> TopAppBar + LazyColumn content
     Surface(color = palette.screenBackground) {
         Scaffold(
             containerColor = palette.screenBackground,
             topBar = {
+                // Top bar hierarchy: TopAppBar -> Text("StreamX") + IconButton(Notifications)
                 TopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = palette.topBarContainer,
@@ -158,9 +193,11 @@ fun NetflixInspiredScreen() {
                 verticalArrangement = Arrangement.spacedBy(22.dp)
             ) {
                 item {
+                    // Content section 1: featured hero banner
                     HeroBanner(palette = palette)
                 }
                 items(rows) { row ->
+                    // Content section 2: repeated content category rows
                     CategoryRow(row = row, palette = palette)
                 }
             }
@@ -168,6 +205,20 @@ fun NetflixInspiredScreen() {
     }
 }
 
+/*
+ HeroBanner hierarchy:
+ Box
+   -> Column
+      -> Text("The Silent Case")
+      -> Text("Crime • Thriller • 2h 08m")
+      -> Row
+         -> Button(Play)
+            -> Icon(PlayArrow)
+            -> Spacer
+            -> Text("Play")
+         -> Button(My List)
+            -> Text("My List")
+*/
 @Composable
 private fun HeroBanner(palette: NetflixPalette) {
     Box(
@@ -222,6 +273,16 @@ private fun HeroBanner(palette: NetflixPalette) {
     }
 }
 
+/*
+ CategoryRow hierarchy:
+ Column
+   -> Text(row.title)
+   -> LazyRow
+      -> PosterCard [repeated]
+         -> Card
+            -> Box
+               -> Text(title)
+*/
 @Composable
 private fun CategoryRow(row: ContentRow, palette: NetflixPalette) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -243,6 +304,12 @@ private fun CategoryRow(row: ContentRow, palette: NetflixPalette) {
     }
 }
 
+/*
+ PosterCard hierarchy:
+ Card
+   -> Box
+      -> Text(title)
+*/
 @Composable
 private fun PosterCard(title: String, palette: NetflixPalette) {
     Card(
