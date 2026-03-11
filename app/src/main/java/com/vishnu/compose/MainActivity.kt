@@ -22,8 +22,8 @@ class MainActivity : ComponentActivity() {
             ComposeTheme {
 //                BestPracticeScreen()
 //                NetflixInspiredScreen()
-//                SpotifyInspiredScreen()
-                PinterestInspiredScreen()
+                SpotifyInspiredScreen()
+//                PinterestInspiredScreen()
             }
         }
     }
