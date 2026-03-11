@@ -67,6 +67,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
@@ -368,6 +371,8 @@ fun TextComponentsSection() {
 // ============================================
 @Composable
 fun ButtonComponentsSection() {
+    var selectedSegment by remember { mutableIntStateOf(0) }
+
     SectionContainer(title = "Button Components") {
 
         // Filled Button with all parameters
@@ -444,6 +449,31 @@ fun ButtonComponentsSection() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Filled Tonal Button")
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Segmented Button (single-select)
+        Text(
+            text = "Segmented Button",
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
+        Spacer(modifier = Modifier.height(6.dp))
+        SingleChoiceSegmentedButtonRow(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            listOf("All", "Favorites", "Saved").forEachIndexed { index, label ->
+                SegmentedButton(
+                    shape = SegmentedButtonDefaults.itemShape(
+                        index = index,
+                        count = 3
+                    ),
+                    onClick = { selectedSegment = index },
+                    selected = selectedSegment == index,
+                    label = { Text(label) }
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))

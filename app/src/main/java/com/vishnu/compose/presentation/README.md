@@ -91,7 +91,7 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `FilterChip`                   | Selectable filter chip           |      ✅ | `FoodDeliveryScreen.kt`                                                       |
 | ✅ `SuggestionChip`               | Small suggestion action          |      ✅ | `FoodDeliveryScreen.kt`                                                       |
 | ✅ `InputChip`                    | Chip with dismiss/input behavior |      ✅ | `FoodDeliveryScreen.kt`                                                       |
-| ⬜ `SegmentedButton`              | Segmented selection button       |      ⬜ | Not found                                                                    |
+| ✅ `SegmentedButton`              | Segmented selection button       |      ✅ | `BestPracticeScreen.kt`                                                      |
 
 ---
 
@@ -138,7 +138,7 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `TabRow`                 | Horizontal tab container        |      ✅ | `BestPracticeScreen.kt`                                                                                  |
 | ✅ `Tab`                    | Single tab item                 |      ✅ | `BestPracticeScreen.kt`                                                                                  |
 | ✅ `CenterAlignedTopAppBar` | Center-aligned top bar          |      ✅ | `FoodDeliveryScreen.kt`                                                                                   |
-| ⬜ `BottomSheetScaffold`    | Screen with bottom sheet layout |      ⬜ | Not found                                                                                                |
+| ✅ `BottomSheetScaffold`    | Screen with bottom sheet layout |      ✅ | `TravelPlannerScreen.kt`                                                                                  |
 | ✅ `ModalBottomSheet`       | Modal bottom sheet              |      ✅ | `CreatorStudioScreen.kt`                                                                                  |
 | ✅ `NavigationRail`         | Side navigation rail            |      ✅ | `TravelPlannerScreen.kt`                                                                                  |
 | ✅ `NavigationRailItem`     | Item inside navigation rail     |      ✅ | `TravelPlannerScreen.kt`                                                                                  |
@@ -213,7 +213,6 @@ important building blocks used heavily in Compose UI.
 - ⬜ `DatePicker`
 - ⬜ `TimePicker`
 - ⬜ `DateRangePicker`
-- ⬜ `BottomSheetScaffold`
 - ⬜ `TooltipBox`
 - ⬜ `PullToRefreshBox`
 
@@ -247,7 +246,7 @@ If you are learning Compose, study in this order:
 | `SideDrawerScreen.kt`        | Drawer + scaffold + bottom app bar + FAB                                                                                 |
 | `SpotifyInspiredScreen.kt`   | Simple Spotify-like layout                                                                                               |
 | `SpotifyRealisticScreen.kt`  | More realistic Spotify-like layout with nested UI hierarchy comments                                                     |
-| `TravelPlannerScreen.kt`     | Travel planning UI with navigation rail, range slider, tri-state checkbox, and extended FAB                             |
+| `TravelPlannerScreen.kt`     | Travel planning UI with BottomSheetScaffold, navigation rail, range slider, tri-state checkbox, and extended FAB        |
 
 ---
 
