@@ -1,5 +1,6 @@
 package com.vishnu.compose.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,17 +35,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.vishnu.compose.R
 
 private data class PinItem(
     val id: Int,
     val title: String,
     val author: String,
     val imageHeight: Int,
-    val colors: List<Color>
+    val colors: List<Color>,
+    val imageRes: Int?,
+    val assetType: String?
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,56 +66,93 @@ fun PinterestInspiredScreen() {
                 "Cozy living room ideas",
                 "by Studio Loft",
                 220,
-                listOf(Color(0xFFE3F2FD), Color(0xFF90CAF9))
+                listOf(
+                    Color(0xFFE3F2FD), // Light Blue 50
+                    Color(0xFF90CAF9) // Light Blue 200
+                ),
+                null, null
             ),
             PinItem(
                 2,
                 "Minimal desk setup",
                 "by Workmode",
                 160,
-                listOf(Color(0xFFE8F5E9), Color(0xFFA5D6A7))
+                listOf(
+                    Color(0xFFE8F5E9), // Green 50
+                    Color(0xFFA5D6A7) // Green 200
+                ),
+                R.drawable.pin_dummy_photo,
+                "XML Vector"
             ),
             PinItem(
                 3,
                 "Warm lighting moodboard",
                 "by Home Glow",
                 260,
-                listOf(Color(0xFFFFF3E0), Color(0xFFFFCC80))
+                listOf(
+                    Color(0xFFFFF3E0), // Orange 50
+                    Color(0xFFFFCC80) // Orange 200
+                ),
+                R.drawable.mind_map2,
+                "PNG"
             ),
             PinItem(
                 4,
                 "Capsule wardrobe picks",
                 "by Daily Style",
                 190,
-                listOf(Color(0xFFF3E5F5), Color(0xFFCE93D8))
+                listOf(
+                    Color(0xFFF3E5F5), // Purple 50
+                    Color(0xFFCE93D8) // Purple 200
+                ),
+                null, null
             ),
             PinItem(
                 5,
                 "Healthy meal prep",
                 "by Fit Kitchen",
                 230,
-                listOf(Color(0xFFE0F7FA), Color(0xFF80DEEA))
+                listOf(
+                    Color(0xFFE0F7FA), // Cyan 50
+                    Color(0xFF80DEEA) // Cyan 200
+                ),
+                null, null
             ),
             PinItem(
                 6,
                 "Sunday brunch table",
                 "by Food Stories",
                 170,
-                listOf(Color(0xFFFFEBEE), Color(0xFFEF9A9A))
+                listOf(
+                    Color(0xFFFFEBEE), // Red 50
+                    Color(0xFFEF9A9A) // Red 200
+                ),
+                R.drawable.pin_dummy_pic,
+                "XML Vector"
             ),
             PinItem(
                 7,
                 "Nature travel spots",
                 "by Explore Now",
                 210,
-                listOf(Color(0xFFE8EAF6), Color(0xFF9FA8DA))
+                listOf(
+                    Color(0xFFE8EAF6), // Indigo 50
+                    Color(0xFF9FA8DA) // Indigo 200
+                ),
+                R.drawable.pin_dummy_photo,
+                "XML Vector"
             ),
             PinItem(
                 8,
                 "Plant shelf inspiration",
                 "by Green Corner",
                 250,
-                listOf(Color(0xFFF1F8E9), Color(0xFFC5E1A5))
+                listOf(
+                    Color(0xFFF1F8E9), // Light Green 50
+                    Color(0xFFC5E1A5) // Light Green 200
+                ),
+                R.drawable.mind_map2,
+                "PNG"
             )
         )
     }
@@ -205,8 +247,17 @@ private fun PinCard(pin: PinItem) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(pin.imageHeight.dp)
-                    .background(brush = Brush.verticalGradient(pin.colors)) // Apply gradient
-            )
+                    .background(brush = Brush.verticalGradient(pin.colors)) // Gradient tint behind dummy image.
+            ) {
+                if (pin.imageRes != null) {
+                    Image(
+                        painter = painterResource(id = pin.imageRes),
+                        contentDescription = "Pin preview image",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(
                     text = pin.title,
@@ -221,6 +272,14 @@ private fun PinCard(pin: PinItem) {
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                if (pin.assetType != null) {
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "Asset: ${pin.assetType}",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
     }
@@ -231,4 +290,3 @@ private fun PinCard(pin: PinItem) {
 private fun PinterestInspiredScreenPreview() {
     PinterestInspiredScreen()
 }
-
