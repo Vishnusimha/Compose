@@ -381,7 +381,7 @@ fun ButtonComponentsSection() {
             enabled = true,
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF6200EE),
+                containerColor = Color(0xFF6200EE), // Deep Purple
                 contentColor = Color.White,
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.LightGray
@@ -391,7 +391,7 @@ fun ButtonComponentsSection() {
                 pressedElevation = 8.dp,
                 disabledElevation = 0.dp
             ),
-            border = BorderStroke(2.dp, Color(0xFF3700B3)),
+            border = BorderStroke(2.dp, Color(0xFF3700B3)), // Dark Purple
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp) //?
         ) {
             Icon(
@@ -480,8 +480,8 @@ fun CardComponentsSection() {
                 .shadow(elevation = 8.dp, shape = RoundedCornerShape(16.dp)),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFFFF3E0),
-                contentColor = Color(0xFF5D4037),
+                containerColor = Color(0xFFFFF3E0), // Light Orange
+                contentColor = Color(0xFF5D4037), // Brown
                 disabledContainerColor = Color.Gray,
                 disabledContentColor = Color.LightGray
             ),
@@ -493,7 +493,7 @@ fun CardComponentsSection() {
                 draggedElevation = 12.dp,
                 disabledElevation = 0.dp
             ),
-            border = BorderStroke(2.dp, Color(0xFFFF6F00)),
+            border = BorderStroke(2.dp, Color(0xFFFF6F00)), // Orange
             onClick = { /* Handle click */ }
         ) {
             Column(
@@ -576,8 +576,8 @@ fun InputComponentsSection() {
                 }
             },
 
-            prefix = { Text("Prefix: ") }, //TODO add in detail comment
-            suffix = { Text(" suffix") }, // TODO add in detail comment
+            prefix = { Text("Prefix: ") }, // Static text shown before user input (part of the field value area).
+            suffix = { Text(" suffix") }, // Static text shown after user input (useful for units or fixed labels).
             supportingText = { Text("Supporting text goes here") },
             isError = false,
             singleLine = true,
@@ -585,10 +585,10 @@ fun InputComponentsSection() {
             minLines = 1,
             shape = RoundedCornerShape(8.dp),
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFE8F5E9),
-                unfocusedContainerColor = Color(0xFFF1F8E9),
-                focusedIndicatorColor = Color(0xFF4CAF50),
-                unfocusedIndicatorColor = Color(0xFF8BC34A)
+                focusedContainerColor = Color(0xFFE8F5E9), // Very Light Green
+                unfocusedContainerColor = Color(0xFFF1F8E9), // Pale Green
+                focusedIndicatorColor = Color(0xFF4CAF50), // Green
+                unfocusedIndicatorColor = Color(0xFF8BC34A) // Light Green
             )
         )
 
@@ -631,7 +631,7 @@ fun SelectionComponentsSection() {
                 modifier = Modifier.size(32.dp),
                 enabled = true,
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Color(0xFF6200EE),
+                    checkedColor = Color(0xFF6200EE), // Deep Purple
                     uncheckedColor = Color.Gray,
                     checkmarkColor = Color.White,
                     disabledCheckedColor = Color.LightGray,
@@ -661,8 +661,8 @@ fun SelectionComponentsSection() {
                 modifier = Modifier.scale(1.2f),
                 enabled = true,
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = Color(0xFF4CAF50),
-                    checkedTrackColor = Color(0xFFC8E6C9),
+                    checkedThumbColor = Color(0xFF4CAF50), // Green
+                    checkedTrackColor = Color(0xFFC8E6C9), // Very Light Green
                     uncheckedThumbColor = Color.Gray,
                     uncheckedTrackColor = Color.LightGray,
                     checkedBorderColor = Color.Transparent,
@@ -704,7 +704,7 @@ fun SelectionComponentsSection() {
                         onClick = { selectedOption = option },
                         enabled = true,
                         colors = RadioButtonDefaults.colors(
-                            selectedColor = Color(0xFFFF6F00),
+                            selectedColor = Color(0xFFFF6F00), // Orange
                             unselectedColor = Color.Gray,
                             disabledSelectedColor = Color.LightGray,
                             disabledUnselectedColor = Color.LightGray
@@ -733,13 +733,13 @@ fun SelectionComponentsSection() {
                 valueRange = 0f..1f,
                 steps = 10,
                 onValueChangeFinished = { /* Called when user stops dragging */ },
-//                TODO explain each below SliderDefaults as simple as possible
+                // Slider color roles: thumb = handle, track = bar, tick = step markers; active/inactive reflect progress state.
                 colors = SliderDefaults.colors(
-                    thumbColor = Color(0xFFE91E63),
-                    activeTrackColor = Color(0xFFE91E63),
-                    activeTickColor = Color(0xFFAD1457),
-                    inactiveTrackColor = Color(0xFFF8BBD0),
-                    inactiveTickColor = Color(0xFFE91E63),
+                    thumbColor = Color(0xFFE91E63), // Pink
+                    activeTrackColor = Color(0xFFE91E63), // Pink
+                    activeTickColor = Color(0xFFAD1457), // Dark Pink
+                    inactiveTrackColor = Color(0xFFF8BBD0), // Light Pink
+                    inactiveTickColor = Color(0xFFE91E63), // Pink
                     disabledThumbColor = Color.LightGray,
                     disabledActiveTrackColor = Color.LightGray,
                     disabledActiveTickColor = Color.LightGray,
@@ -772,7 +772,7 @@ fun ProgressIndicatorsSection() {
             CircularProgressIndicator(
                 progress = { 0.7f },
                 modifier = Modifier.size(40.dp),
-                color = Color(0xFF4CAF50),
+                color = Color(0xFF4CAF50), // Green
                 strokeWidth = 6.dp
             )
 
@@ -797,8 +797,8 @@ fun ProgressIndicatorsSection() {
             LinearProgressIndicator(
                 progress = { 0.65f },
                 modifier = Modifier.fillMaxWidth(),
-                color = Color(0xFFFF5722),
-                trackColor = Color(0xFFFFCCBC)
+                color = Color(0xFFFF5722), // Deep Orange
+                trackColor = Color(0xFFFFCCBC) // Light Orange
             )
         }
     }
@@ -836,7 +836,7 @@ fun HorizontalScrollSection() {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
-                    ) { // TODO WHy BOx here? , what we achieved, by using Box
+                    ) { // Box lets us center the label over the card regardless of card size.
                         Text(
                             text = "Item ${index + 1}",
                             color = Color.White,
@@ -857,7 +857,7 @@ fun HorizontalScrollSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .background(Color(0xFFF5F5F5))
+                .background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp)) // Light Gray
                 .padding(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -894,8 +894,8 @@ fun BoxLayoutSection() {
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF667EEA),
-                            Color(0xFF764BA2)
+                            Color(0xFF667EEA), // Periwinkle Blue
+                            Color(0xFF764BA2) // Purple
                         )
                     ),
                     shape = RoundedCornerShape(16.dp)
@@ -973,7 +973,10 @@ fun BoxLayoutSection() {
                     .height(150.dp)
                     .background(
                         brush = Brush.horizontalGradient(
-                            colors = listOf(Color(0xFFFF6B6B), Color(0xFFFFE66D))
+                            colors = listOf(
+                                Color(0xFFFF6B6B), // Coral Red
+                                Color(0xFFFFE66D) // Warm Yellow
+                            )
                         )
                     )
             )
@@ -998,7 +1001,7 @@ fun BoxLayoutSection() {
                             .size(80.dp)
                             .offset(y = (-40).dp),
                         shape = CircleShape,
-                        color = Color(0xFF6200EE),
+                        color = Color(0xFF6200EE), // Deep Purple
                         border = BorderStroke(4.dp, Color.White),
                         shadowElevation = 8.dp
                     ) {
@@ -1042,7 +1045,7 @@ fun ComplexRowLayoutSection() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp))
+                .background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp)) // Light Gray
                 .padding(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -1051,7 +1054,7 @@ fun ComplexRowLayoutSection() {
                 modifier = Modifier
                     .weight(1f)
                     .height(60.dp)
-                    .background(Color(0xFFE3F2FD), RoundedCornerShape(4.dp)),
+                    .background(Color(0xFFE3F2FD), RoundedCornerShape(4.dp)), // Very Light Blue
                 contentAlignment = Alignment.Center
             ) {
                 Text("Weight 1")
@@ -1060,7 +1063,7 @@ fun ComplexRowLayoutSection() {
                 modifier = Modifier
                     .weight(2f)
                     .height(60.dp)
-                    .background(Color(0xFFC5CAE9), RoundedCornerShape(4.dp)),
+                    .background(Color(0xFFC5CAE9), RoundedCornerShape(4.dp)), // Light Indigo
                 contentAlignment = Alignment.Center
             ) {
                 Text("Weight 2")
@@ -1069,7 +1072,7 @@ fun ComplexRowLayoutSection() {
                 modifier = Modifier
                     .weight(1f)
                     .height(60.dp)
-                    .background(Color(0xFF9FA8DA), RoundedCornerShape(4.dp)),
+                    .background(Color(0xFF9FA8DA), RoundedCornerShape(4.dp)), // Indigo Gray
                 contentAlignment = Alignment.Center
             ) {
                 Text("Weight 1")
@@ -1106,7 +1109,7 @@ fun DemoRow(arrangement: Arrangement.Horizontal) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFFFFF3E0))
+            .background(Color(0xFFFFF3E0)) // Light Orange
             .padding(vertical = 8.dp),
         horizontalArrangement = arrangement
     ) {
@@ -1114,7 +1117,7 @@ fun DemoRow(arrangement: Arrangement.Horizontal) {
             Box(
                 modifier = Modifier
                     .size(40.dp)
-                    .background(Color(0xFFFF9800), CircleShape),
+                    .background(Color(0xFFFF9800), CircleShape), // Orange
                 contentAlignment = Alignment.Center
             ) {
                 Text("${it + 1}", color = Color.White, fontWeight = FontWeight.Bold)
@@ -1284,7 +1287,7 @@ fun BadgeComponentsSection() {
             // Simple badge
             BadgedBox(
                 badge = {
-                    Badge(containerColor = Color(0xFF4CAF50))
+                    Badge(containerColor = Color(0xFF4CAF50)) // Green
                 }
             ) {
                 Icon(
@@ -1298,7 +1301,7 @@ fun BadgeComponentsSection() {
             BadgedBox(
                 badge = {
                     Badge(
-                        containerColor = Color(0xFFFF9800),
+                        containerColor = Color(0xFFFF9800), // Orange
                         contentColor = Color.White
                     ) {
                         Text("New")
@@ -1345,7 +1348,7 @@ fun DividersSection() {
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 4.dp,
-            color = Color(0xFFFF5722)
+            color = Color(0xFFFF5722) // Deep Orange
         )
 
         Text("Item 4")
@@ -1368,8 +1371,8 @@ fun DrawerContent(onCloseDrawer: () -> Unit) {
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFF6200EE),
-                            Color(0xFF3700B3)
+                            Color(0xFF6200EE), // Deep Purple
+                            Color(0xFF3700B3) // Dark Purple
                         )
                     )
                 )
@@ -1390,7 +1393,7 @@ fun DrawerContent(onCloseDrawer: () -> Unit) {
                             imageVector = Icons.Default.Person,
                             contentDescription = null,
                             modifier = Modifier.size(32.dp),
-                            tint = Color(0xFF6200EE)
+                            tint = Color(0xFF6200EE) // Deep Purple
                         )
                     }
                 }
@@ -1543,7 +1546,7 @@ fun DialogSection(onDismiss: () -> Unit) {
             Icon(
                 imageVector = Icons.Default.Favorite,
                 contentDescription = null,
-                tint = Color(0xFFE91E63),
+                tint = Color(0xFFE91E63), // Pink
                 modifier = Modifier.size(48.dp)
             )
         },
@@ -1615,4 +1618,3 @@ fun SectionContainer(
         }
     }
 }
-
