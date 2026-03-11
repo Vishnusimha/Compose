@@ -1,5 +1,63 @@
 package com.vishnu.compose.presentation
 
+/*
+ UI Hierarchy (Top -> Bottom)
+
+ Surface (screen background)
+   -> Scaffold (screen structure)
+      -> LazyColumn (scrollable content)
+         -> item: HeaderSection
+            -> Column
+               -> Text("Good evening")
+               -> Text("Enjoy your music experience")
+               -> Row
+                  -> Surface(Updates button)
+                     -> Row -> Icon + Text
+                  -> Surface(Settings button)
+                     -> Row -> Icon + Text
+         -> item: QuickPickRow
+            -> Column
+               -> Text("Quick picks for you")
+               -> LazyRow
+                  -> Surface(card) [repeated]
+                     -> Row
+                        -> Box(thumbnail)
+                        -> Column
+                           -> Text(title)
+                           -> Text(subtitle)
+         -> item: "Your playlists" title block
+            -> Spacer + Text + Spacer
+         -> items: PlaylistListItem [repeated]
+            -> Surface(row container)
+               -> Row
+                  -> Box(thumbnail)
+                  -> Column
+                     -> Text(title)
+                     -> Text(subtitle)
+                  -> IconButton -> Icon(Favorite)
+      -> MiniPlayerBar (Scaffold bottomBar)
+         -> Progress bar
+         -> Surface(player container)
+            -> Column
+               -> Row(song info)
+                  -> Box(thumbnail)
+                  -> Spacer
+                  -> Column -> Text(song) + Text(artist)
+                  -> IconButton -> Icon(Favorite/FavoriteBorder)
+               -> Spacer
+               -> Row(playback controls)
+                  -> IconButton(Shuffle)
+                  -> Spacer
+                  -> IconButton(SkipPrevious)
+                  -> Spacer
+                  -> Surface(Play/Pause circle)
+                     -> IconButton -> Icon(PauseCircle/PlayArrow)
+                  -> Spacer
+                  -> IconButton(SkipNext)
+                  -> Spacer
+                  -> IconButton(Repeat)
+*/
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -68,12 +126,15 @@ fun SpotifyRealisticScreen() {
         )
     }
 
+    // Screen hierarchy root:
+    // Surface -> Scaffold -> LazyColumn content + MiniPlayerBar(bottomBar)
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF0F0F0F)
     ) {
         Scaffold(
             containerColor = Color.Transparent,
+            // BottomBar hierarchy: MiniPlayerBar -> ProgressBar + PlayerControls
             bottomBar = { MiniPlayerBar() }
         ) { paddingValues ->
             LazyColumn(
@@ -83,12 +144,15 @@ fun SpotifyRealisticScreen() {
                 contentPadding = PaddingValues(bottom = 16.dp)
             ) {
                 item {
+                    // Content section 1: header area
                     HeaderSection()
                 }
                 item {
+                    // Content section 2: horizontal quick-picks carousel
                     QuickPickRow(quickPicks)
                 }
                 item {
+                    // Content section 3: playlists title row
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(
                         text = "Your playlists",
@@ -100,6 +164,7 @@ fun SpotifyRealisticScreen() {
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 items(playlists) { album ->
+                    // Content section 4: repeated playlist rows
                     PlaylistListItem(album = album)
                 }
             }
@@ -107,6 +172,21 @@ fun SpotifyRealisticScreen() {
     }
 }
 
+/*
+ HeaderSection hierarchy:
+ Column
+   -> Text("Good evening")
+   -> Text("Enjoy your music experience")
+   -> Row
+      -> Surface(Updates button)
+         -> Row
+            -> Icon(Notifications)
+            -> Text("Updates")
+      -> Surface(Settings button)
+         -> Row
+            -> Icon(Settings)
+            -> Text("Settings")
+*/
 @Composable
 private fun HeaderSection() {
     Column(
@@ -141,7 +221,13 @@ private fun HeaderSection() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Quick action buttons
+            // Quick action button - Notifications
+            // Surface is used here to:
+            // 1. Apply rounded corners (shape = RoundedCornerShape)
+            // 2. Set background color with elevation/shadow effect
+            // 3. Clip content to the rounded shape automatically
+            // Alternative: Box + background + clip would require more code.
+            // Surface = color + shape + elevation in one composable!
             Surface(
                 modifier = Modifier
                     .weight(1f)
@@ -203,6 +289,18 @@ private fun HeaderSection() {
     }
 }
 
+/*
+ QuickPickRow hierarchy:
+ Column
+   -> Text("Quick picks for you")
+   -> LazyRow
+      -> Surface(card) [repeated]
+         -> Row
+            -> Box(thumbnail)
+            -> Column
+               -> Text(item.title)
+               -> Text(item.subtitle)
+*/
 @Composable
 private fun QuickPickRow(items: List<CinemaAlbum>) {
     Column(
@@ -279,6 +377,17 @@ private fun QuickPickRow(items: List<CinemaAlbum>) {
     }
 }
 
+/*
+ PlaylistListItem hierarchy:
+ Surface(row container)
+   -> Row
+      -> Box(thumbnail)
+      -> Column
+         -> Text(album.title)
+         -> Text(album.subtitle)
+      -> IconButton(like)
+         -> Icon(Favorite)
+*/
 @Composable
 private fun PlaylistListItem(album: CinemaAlbum) {
     Surface(
@@ -343,6 +452,35 @@ private fun PlaylistListItem(album: CinemaAlbum) {
     }
 }
 
+/*
+ MiniPlayerBar hierarchy:
+ Column
+   -> Progress track Box
+      -> Progress fill Box
+   -> Surface(player container)
+      -> Column
+         -> Row(song info)
+            -> Box(thumbnail)
+            -> Spacer
+            -> Column
+               -> Text("Night Changes")
+               -> Text("One Direction")
+            -> IconButton(like)
+               -> Icon(Favorite/FavoriteBorder)
+         -> Spacer
+         -> Row(playback controls)
+            -> IconButton -> Icon(Shuffle)
+            -> Spacer
+            -> IconButton -> Icon(SkipPrevious)
+            -> Spacer
+            -> Surface(play/pause button)
+               -> IconButton
+                  -> Icon(PauseCircle/PlayArrow)
+            -> Spacer
+            -> IconButton -> Icon(SkipNext)
+            -> Spacer
+            -> IconButton -> Icon(Repeat)
+*/
 @Composable
 private fun MiniPlayerBar() {
     // Track progress state (0.0 to 1.0)
@@ -536,4 +674,3 @@ private fun MiniPlayerBar() {
 private fun SpotifyInspiredScreenPreview() {
     SpotifyRealisticScreen()
 }
-

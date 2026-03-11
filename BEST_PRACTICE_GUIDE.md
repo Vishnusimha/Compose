@@ -719,5 +719,4 @@ Surface(
 
 **Why this is better:**
 - Keeps styling consistent with Material3
-- Centralizes shape/color/elevation/click in one composable
-- Easier to reuse and maintain
+- Centralizes shape/color/elevation/
