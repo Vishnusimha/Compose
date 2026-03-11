@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.vishnu.compose.R
 
 private data class PinItem(
@@ -49,6 +50,7 @@ private data class PinItem(
     val author: String,
     val imageHeight: Int,
     val colors: List<Color>,
+    val imageUrl: String?,
     val imageRes: Int?,
     val assetType: String?
 )
@@ -70,7 +72,9 @@ fun PinterestInspiredScreen() {
                     Color(0xFFE3F2FD), // Light Blue 50
                     Color(0xFF90CAF9) // Light Blue 200
                 ),
-                null, null
+                null,
+                null,
+                null
             ),
             PinItem(
                 2,
@@ -81,20 +85,22 @@ fun PinterestInspiredScreen() {
                     Color(0xFFE8F5E9), // Green 50
                     Color(0xFFA5D6A7) // Green 200
                 ),
+                null,
                 R.drawable.pin_dummy_photo,
                 "XML Vector"
             ),
             PinItem(
                 3,
-                "Warm lighting moodboard",
+                "Modern reading corner",
                 "by Home Glow",
                 260,
                 listOf(
                     Color(0xFFFFF3E0), // Orange 50
                     Color(0xFFFFCC80) // Orange 200
                 ),
-                R.drawable.mind_map2,
-                "PNG"
+                "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
+                null,
+                "Remote AsyncImage"
             ),
             PinItem(
                 4,
@@ -105,7 +111,9 @@ fun PinterestInspiredScreen() {
                     Color(0xFFF3E5F5), // Purple 50
                     Color(0xFFCE93D8) // Purple 200
                 ),
-                null, null
+                null,
+                null,
+                null
             ),
             PinItem(
                 5,
@@ -116,7 +124,9 @@ fun PinterestInspiredScreen() {
                     Color(0xFFE0F7FA), // Cyan 50
                     Color(0xFF80DEEA) // Cyan 200
                 ),
-                null, null
+                null,
+                null,
+                null
             ),
             PinItem(
                 6,
@@ -127,6 +137,7 @@ fun PinterestInspiredScreen() {
                     Color(0xFFFFEBEE), // Red 50
                     Color(0xFFEF9A9A) // Red 200
                 ),
+                null,
                 R.drawable.pin_dummy_pic,
                 "XML Vector"
             ),
@@ -139,6 +150,7 @@ fun PinterestInspiredScreen() {
                     Color(0xFFE8EAF6), // Indigo 50
                     Color(0xFF9FA8DA) // Indigo 200
                 ),
+                null,
                 R.drawable.pin_dummy_photo,
                 "XML Vector"
             ),
@@ -151,6 +163,7 @@ fun PinterestInspiredScreen() {
                     Color(0xFFF1F8E9), // Light Green 50
                     Color(0xFFC5E1A5) // Light Green 200
                 ),
+                null,
                 R.drawable.mind_map2,
                 "PNG"
             )
@@ -249,13 +262,24 @@ private fun PinCard(pin: PinItem) {
                     .height(pin.imageHeight.dp)
                     .background(brush = Brush.verticalGradient(pin.colors)) // Gradient tint behind dummy image.
             ) {
-                if (pin.imageRes != null) {
+                when {
+                    pin.imageUrl != null -> {
+                        AsyncImage(
+                            model = pin.imageUrl,
+                            contentDescription = "Pin preview image",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+
+                    pin.imageRes != null -> {
                     Image(
                         painter = painterResource(id = pin.imageRes),
                         contentDescription = "Pin preview image",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()
                     )
+                    }
                 }
             }
             Column(modifier = Modifier.padding(12.dp)) {
