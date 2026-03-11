@@ -16,11 +16,14 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 ## Files in this package
 
 - `BestPracticeScreen.kt`
+- `CreatorStudioScreen.kt`
+- `FoodDeliveryScreen.kt`
 - `NetflixInspiredScreen.kt`
 - `PinterestInspiredScreen.kt`
 - `SideDrawerScreen.kt`
 - `SpotifyInspiredScreen.kt`
 - `SpotifyRealisticScreen.kt`
+- `TravelPlannerScreen.kt`
 
 ---
 
@@ -37,7 +40,7 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `LazyRow`            | Horizontal scrolling list                     |      ✅ | `BestPracticeScreen.kt`, `PinterestInspiredScreen.kt`, `NetflixInspiredScreen.kt`, `SpotifyInspiredScreen.kt`, `SpotifyRealisticScreen.kt` |
 | ✅ `LazyVerticalGrid`   | Grid layout for lazy content                  |      ✅ | `PinterestInspiredScreen.kt`                                                                                                               |
 | ⬜ `LazyHorizontalGrid` | Horizontal lazy grid                          |      ⬜ | Not currently used (only commented in `PinterestInspiredScreen.kt`)                                                                        |
-| ⬜ `FlowRow`            | Wrapping horizontal layout                    |      ⬜ | Not found                                                                                                                                  |
+| ✅ `FlowRow`            | Wrapping horizontal layout                    |      ✅ | `FoodDeliveryScreen.kt`                                                                                                                   |
 | ⬜ `FlowColumn`         | Wrapping vertical layout                      |      ⬜ | Not found                                                                                                                                  |
 | ⬜ `BoxWithConstraints` | Responsive layout using available constraints |      ⬜ | Not found                                                                                                                                  |
 | ⬜ `ConstraintLayout`   | Constraint-based layout                       |      ⬜ | Not found                                                                                                                                  |
@@ -53,8 +56,8 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `Image`          | Show bitmap/vector drawable image    |      ✅ | `PinterestInspiredScreen.kt` |
 | ✅ `AsyncImage`     | Load remote image (usually via Coil) |      ✅ | `PinterestInspiredScreen.kt` |
 | ⬜ `Canvas`         | Custom drawing                       |      ⬜ | Not found                    |
-| ⬜ `BasicText`      | Low-level text composable            |      ⬜ | Not found                    |
-| ⬜ `BasicTextField` | Low-level text input composable      |      ⬜ | Not found                    |
+| ✅ `BasicText`      | Low-level text composable            |      ✅ | `FoodDeliveryScreen.kt`      |
+| ✅ `BasicTextField` | Low-level text input composable      |      ✅ | `FoodDeliveryScreen.kt`      |
 
 ---
 
@@ -83,11 +86,11 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `FilledTonalButton`            | Secondary/emphasis button        |      ✅ | `BestPracticeScreen.kt`                                                      |
 | ✅ `IconButton`                   | Clickable icon action            |      ✅ | All screen files                                                             |
 | ✅ `FloatingActionButton`         | Floating action button           |      ✅ | `BestPracticeScreen.kt`, `PinterestInspiredScreen.kt`, `SideDrawerScreen.kt` |
-| ⬜ `ExtendedFloatingActionButton` | FAB with icon + text             |      ⬜ | Not found                                                                    |
+| ✅ `ExtendedFloatingActionButton` | FAB with icon + text             |      ✅ | `TravelPlannerScreen.kt`                                                      |
 | ✅ `AssistChip`                   | Small assist/action chip         |      ✅ | `PinterestInspiredScreen.kt`                                                 |
-| ⬜ `FilterChip`                   | Selectable filter chip           |      ⬜ | Not found                                                                    |
-| ⬜ `SuggestionChip`               | Small suggestion action          |      ⬜ | Not found                                                                    |
-| ⬜ `InputChip`                    | Chip with dismiss/input behavior |      ⬜ | Not found                                                                    |
+| ✅ `FilterChip`                   | Selectable filter chip           |      ✅ | `FoodDeliveryScreen.kt`                                                       |
+| ✅ `SuggestionChip`               | Small suggestion action          |      ✅ | `FoodDeliveryScreen.kt`                                                       |
+| ✅ `InputChip`                    | Chip with dismiss/input behavior |      ✅ | `FoodDeliveryScreen.kt`                                                       |
 | ⬜ `SegmentedButton`              | Segmented selection button       |      ⬜ | Not found                                                                    |
 
 ---
@@ -100,8 +103,8 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `OutlinedTextField`      | Outlined Material text input  |      ✅ | `BestPracticeScreen.kt` |
 | ⬜ `SecureTextField`        | Password-style secure input   |      ⬜ | Not found               |
 | ⬜ `SearchBar`              | Search UI container           |      ⬜ | Not found               |
-| ⬜ `DropdownMenu`           | Menu anchored to a trigger    |      ⬜ | Not found               |
-| ⬜ `ExposedDropdownMenuBox` | Text field + dropdown pattern |      ⬜ | Not found               |
+| ✅ `DropdownMenu`           | Menu anchored to a trigger    |      ✅ | `FoodDeliveryScreen.kt` |
+| ✅ `ExposedDropdownMenuBox` | Text field + dropdown pattern |      ✅ | `FoodDeliveryScreen.kt` |
 | ⬜ `DatePicker`             | Date selection UI             |      ⬜ | Not found               |
 | ⬜ `DateRangePicker`        | Date range selection UI       |      ⬜ | Not found               |
 | ⬜ `TimePicker`             | Time selection UI             |      ⬜ | Not found               |
@@ -116,8 +119,8 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `Switch`           | On/off toggle               |      ✅ | `BestPracticeScreen.kt` |
 | ✅ `RadioButton`      | Single-select option        |      ✅ | `BestPracticeScreen.kt` |
 | ✅ `Slider`           | Single value slider         |      ✅ | `BestPracticeScreen.kt` |
-| ⬜ `RangeSlider`      | Two-thumb slider            |      ⬜ | Not found               |
-| ⬜ `TriStateCheckbox` | Three-state checkbox        |      ⬜ | Not found               |
+| ✅ `RangeSlider`      | Two-thumb slider            |      ✅ | `TravelPlannerScreen.kt` |
+| ✅ `TriStateCheckbox` | Three-state checkbox        |      ✅ | `TravelPlannerScreen.kt` |
 
 ---
 
@@ -134,12 +137,12 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `NavigationDrawerItem`   | Item inside drawer              |      ✅ | `BestPracticeScreen.kt`                                                                                  |
 | ✅ `TabRow`                 | Horizontal tab container        |      ✅ | `BestPracticeScreen.kt`                                                                                  |
 | ✅ `Tab`                    | Single tab item                 |      ✅ | `BestPracticeScreen.kt`                                                                                  |
-| ⬜ `CenterAlignedTopAppBar` | Center-aligned top bar          |      ⬜ | Not found                                                                                                |
+| ✅ `CenterAlignedTopAppBar` | Center-aligned top bar          |      ✅ | `FoodDeliveryScreen.kt`                                                                                   |
 | ⬜ `BottomSheetScaffold`    | Screen with bottom sheet layout |      ⬜ | Not found                                                                                                |
-| ⬜ `ModalBottomSheet`       | Modal bottom sheet              |      ⬜ | Not found                                                                                                |
-| ⬜ `NavigationRail`         | Side navigation rail            |      ⬜ | Not found                                                                                                |
-| ⬜ `NavigationRailItem`     | Item inside navigation rail     |      ⬜ | Not found                                                                                                |
-| ⬜ `Pager`                  | Horizontal pager/swipe pages    |      ⬜ | Not found                                                                                                |
+| ✅ `ModalBottomSheet`       | Modal bottom sheet              |      ✅ | `CreatorStudioScreen.kt`                                                                                  |
+| ✅ `NavigationRail`         | Side navigation rail            |      ✅ | `TravelPlannerScreen.kt`                                                                                  |
+| ✅ `NavigationRailItem`     | Item inside navigation rail     |      ✅ | `TravelPlannerScreen.kt`                                                                                  |
+| ✅ `Pager`                  | Horizontal pager/swipe pages    |      ✅ | `CreatorStudioScreen.kt`                                                                                  |
 
 ---
 
@@ -152,8 +155,8 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | ✅ `AlertDialog`               | Modal dialog                 |      ✅ | `BestPracticeScreen.kt` |
 | ✅ `Badge`                     | Small count/status indicator |      ✅ | `BestPracticeScreen.kt` |
 | ✅ `BadgedBox`                 | Wrap content with badge      |      ✅ | `BestPracticeScreen.kt` |
-| ⬜ `Snackbar`                  | Temporary message at bottom  |      ⬜ | Not found               |
-| ⬜ `SnackbarHost`              | Host for snackbars           |      ⬜ | Not found               |
+| ✅ `Snackbar`                  | Temporary message at bottom  |      ✅ | `CreatorStudioScreen.kt` |
+| ✅ `SnackbarHost`              | Host for snackbars           |      ✅ | `CreatorStudioScreen.kt` |
 | ⬜ `TooltipBox`                | Tooltip container            |      ⬜ | Not found               |
 | ⬜ `PullToRefreshBox`          | Pull to refresh container    |      ⬜ | Not found               |
 
@@ -164,7 +167,7 @@ reference of the main UI elements you will use in real apps** across Compose Fou
 | UI element            | What it is used for       | Status | Example file(s)         |
 |-----------------------|---------------------------|-------:|-------------------------|
 | ✅ `HorizontalDivider` | Horizontal separator line |      ✅ | `BestPracticeScreen.kt` |
-| ⬜ `VerticalDivider`   | Vertical separator line   |      ⬜ | Not found               |
+| ✅ `VerticalDivider`   | Vertical separator line   |      ✅ | `TravelPlannerScreen.kt` |
 
 ---
 
@@ -182,8 +185,8 @@ important building blocks used heavily in Compose UI.
 | ✅ `Modifier.padding`                | Internal/external spacing |      ✅ | All files               |
 | ✅ `Modifier.size`                   | Fixed size                |      ✅ | All files               |
 | ✅ `horizontalScroll`                | Manual horizontal scroll  |      ✅ | `BestPracticeScreen.kt` |
-| ⬜ `verticalScroll`                  | Manual vertical scroll    |      ⬜ | Not found               |
-| ⬜ `draggable`                       | Drag interaction          |      ⬜ | Not found               |
+| ✅ `verticalScroll`                  | Manual vertical scroll    |      ✅ | `FoodDeliveryScreen.kt` |
+| ✅ `draggable`                       | Drag interaction          |      ✅ | `CreatorStudioScreen.kt` |
 | ⬜ `swipeable` / `anchoredDraggable` | Swipe-based interaction   |      ⬜ | Not found               |
 
 ---
@@ -195,27 +198,24 @@ important building blocks used heavily in Compose UI.
 - ✅ Layouts: `Box`, `Column`, `Row`, `LazyColumn`, `LazyRow`, `LazyVerticalGrid`
 - ✅ Material structure: `Scaffold`, `TopAppBar`, `Surface`, `Card`
 - ✅ Buttons: `Button`, `OutlinedButton`, `ElevatedButton`, `TextButton`, `FilledTonalButton`,
-  `IconButton`, `FloatingActionButton`
-- ✅ Inputs: `TextField`, `OutlinedTextField`
-- ✅ Selection: `Checkbox`, `Switch`, `RadioButton`, `Slider`
-- ✅ Feedback: `AlertDialog`, `Badge`, `CircularProgressIndicator`, `LinearProgressIndicator`
-- ✅ Navigation: drawer, bottom navigation, top bar, tabs
-- ✅ Media: `Icon`, `Image`, styled `Text`
+  `IconButton`, `FloatingActionButton`, `ExtendedFloatingActionButton`
+- ✅ Inputs: `TextField`, `OutlinedTextField`, `DropdownMenu`, `ExposedDropdownMenuBox`
+- ✅ Selection: `Checkbox`, `Switch`, `RadioButton`, `Slider`, `RangeSlider`, `TriStateCheckbox`
+- ✅ Feedback: `AlertDialog`, `Badge`, `CircularProgressIndicator`, `LinearProgressIndicator`,
+  `Snackbar`, `SnackbarHost`
+- ✅ Navigation: drawer, bottom navigation, top bar, tabs, navigation rail, modal bottom sheet,
+  pager
+- ✅ Media and low-level: `Icon`, `Image`, `AsyncImage`, `BasicText`, `BasicTextField`
 
 ### Good next items to add if you want to learn more
 
-- ⬜ `DropdownMenu`
-- ⬜ `FilterChip`
-- ⬜ `SuggestionChip`
-- ⬜ `ExtendedFloatingActionButton`
-- ⬜ `RangeSlider`
-- ⬜ `Snackbar`
-- ⬜ `ModalBottomSheet`
 - ⬜ `SearchBar`
 - ⬜ `DatePicker`
 - ⬜ `TimePicker`
-- ⬜ `NavigationRail`
-- ⬜ `Pager`
+- ⬜ `DateRangePicker`
+- ⬜ `BottomSheetScaffold`
+- ⬜ `TooltipBox`
+- ⬜ `PullToRefreshBox`
 
 ---
 
@@ -240,11 +240,14 @@ If you are learning Compose, study in this order:
 | File                         | Main things demonstrated                                                                                                 |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `BestPracticeScreen.kt`      | Broadest coverage: text, buttons, cards, inputs, selection, progress, tabs, drawer, navigation, dialog, badges, dividers |
+| `CreatorStudioScreen.kt`     | Creator dashboard UI with pager, snackbar host, draggable scrubber, modal bottom sheet                                   |
+| `FoodDeliveryScreen.kt`      | Food app UI with center top bar, chips, exposed dropdown, and low-level text APIs                                         |
 | `NetflixInspiredScreen.kt`   | Streaming app style UI, top app bar, hero banner, lazy content rows, cards                                               |
 | `PinterestInspiredScreen.kt` | Grid layout, chip filters, image cards, staggered visual idea                                                            |
 | `SideDrawerScreen.kt`        | Drawer + scaffold + bottom app bar + FAB                                                                                 |
 | `SpotifyInspiredScreen.kt`   | Simple Spotify-like layout                                                                                               |
 | `SpotifyRealisticScreen.kt`  | More realistic Spotify-like layout with nested UI hierarchy comments                                                     |
+| `TravelPlannerScreen.kt`     | Travel planning UI with navigation rail, range slider, tri-state checkbox, and extended FAB                             |
 
 ---
 
