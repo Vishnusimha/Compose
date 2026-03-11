@@ -222,6 +222,7 @@ Text
 Image
 Button
 Card
+Surface
 Icon
 TextField
 Checkbox
@@ -235,6 +236,62 @@ Text(
     fontSize = 20.sp
 )
 ```
+
+---
+
+## Surface (Material Container)
+
+`Surface` is a **Material-aware container** used to hold other UI while applying:
+- background/color from theme
+- shape (rounded corners, circles, etc.)
+- elevation (tonal + shadow)
+- border
+- optional click handling
+
+Think of it as the base Material building block for many components (including how `Card` is conceptually built).
+
+### When to use `Surface`
+- You need a styled container but **don't need full Card behavior**.
+- You want a clickable/tappable area with Material styling.
+- You want to apply shape + elevation + color in one place.
+- You want theme-friendly containers for rows, headers, chips, badges, avatars, etc.
+
+### Key parameters
+```kotlin
+Surface(
+    onClick = { },                 // optional
+    shape = RoundedCornerShape(12.dp),
+    color = MaterialTheme.colorScheme.surface,
+    contentColor = MaterialTheme.colorScheme.onSurface,
+    tonalElevation = 2.dp,
+    shadowElevation = 4.dp,
+    border = BorderStroke(1.dp, Color.Gray)
+) {
+    // Content
+}
+```
+
+### `Surface` vs `Card` vs `Box`
+- **Surface**: Material container primitive (color/shape/elevation/border/click).
+- **Card**: Higher-level opinionated Material component for card-style UI.
+- **Box**: Pure layout/stacking container; no Material styling by default.
+
+### Is `Surface` like `FrameLayout` from XML?
+Short answer: **No, not directly**.
+
+- `FrameLayout` is mainly a **layout container** for stacking children.
+- In Compose, the closest layout equivalent to `FrameLayout` is **`Box`**.
+- `Surface` is a **Material-styled container** (theme-aware color, shape, elevation, border, click behavior).
+
+Quick mapping:
+- **`FrameLayout` -> `Box`** (layout/stacking)
+- **`Surface` -> Material container wrapper**
+- Use both together when needed: `Surface { Box { ... } }`
+
+### Real examples in this project
+- `ListItemsSection()` uses `Surface` for each list row container.
+- `BoxLayoutSection()` uses `Surface` for badge/avatar style circular overlays.
+- `DrawerContent()` uses `Surface` for the profile icon container.
 
 ---
 
@@ -286,16 +343,17 @@ Activity
 
 ---
 
-## When to Use Each Layout
+## When to Use Each Layout / Container
 
-| Layout     | Use Case               |
-| ---------- | ---------------------- |
-| Scaffold   | Whole screen structure |
-| Column     | Vertical stacking      |
-| Row        | Horizontal alignment   |
-| Box        | Overlapping / stacking |
-| LazyColumn | Scrollable lists       |
-| LazyRow    | Horizontal lists       |
+| Layout / Container | Use Case                                 |
+| ------------------ | ---------------------------------------- |
+| Scaffold           | Whole screen structure                   |
+| Column             | Vertical stacking                        |
+| Row                | Horizontal alignment                     |
+| Box                | Overlapping / stacking                   |
+| LazyColumn         | Scrollable lists                         |
+| LazyRow            | Horizontal lists                         |
+| Surface            | Material-styled wrapper for section/item |
 
 ---
 
@@ -402,6 +460,7 @@ The `BestPracticeScreen.kt` file included in this project demonstrates:
 - **Text**: With all parameters demonstrated (color, fontSize, fontWeight, fontFamily, textDecoration, textAlign, lineHeight, etc.)
 - **Buttons**: Filled, Outlined, Elevated, Text, Filled Tonal, Icon buttons
 - **Cards**: Basic, Elevated, Outlined cards with custom colors and elevation
+- **Surface**: Material container usage for list items, overlays, and profile/avatar sections
 - **Input Fields**: TextField, OutlinedTextField with full parameter showcase
 - **Selection**: Checkbox, Radio Button, Switch, Slider
 - **Progress**: Circular and Linear progress indicators
@@ -488,6 +547,23 @@ Column(
 }
 ```
 
+### Pattern 4: Surface as Reusable Material Wrapper
+```kotlin
+Surface(
+    modifier = Modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(12.dp),
+    color = MaterialTheme.colorScheme.surfaceVariant,
+    tonalElevation = 2.dp,
+    onClick = { /* Row click */ }
+) {
+    Row(modifier = Modifier.padding(16.dp)) {
+        Icon(Icons.Default.Person, contentDescription = null)
+        Spacer(modifier = Modifier.width(12.dp))
+        Text("Profile")
+    }
+}
+```
+
 ---
 
 ## Quick Reference
@@ -506,6 +582,12 @@ Column(
 ### Alignment
 - `Alignment.TopStart`, `Alignment.Center`, etc.
 - `horizontalAlignment`, `verticalAlignment` in layouts
+
+### Surface Quick Rules
+- Use `Surface` when you need **Material container styling + content**.
+- Prefer `Surface` over only `.background(...)` when you also need elevation/shape/click semantics.
+- Use `Card` when the UI is explicitly card-like; use `Surface` for general wrappers.
+- Use `Box` for stacking; combine with `Surface` when you also need Material styling.
 
 ---
 
@@ -604,3 +686,38 @@ setContent {
 }
 ```
 
+---
+
+## ⚠️ Common Mistake: Using only `background` when `Surface` is needed
+
+**Problem:**
+Using only `Modifier.background(...)` for tappable or elevated containers.
+
+```kotlin
+Row(
+    modifier = Modifier
+        .background(Color.White)
+        .clickable { }
+)
+```
+
+This works visually, but you miss Material container behavior consistency.
+
+**Better:**
+```kotlin
+Surface(
+    onClick = { },
+    shape = RoundedCornerShape(12.dp),
+    color = MaterialTheme.colorScheme.surface,
+    tonalElevation = 2.dp
+) {
+    Row(modifier = Modifier.padding(16.dp)) {
+        Text("Item")
+    }
+}
+```
+
+**Why this is better:**
+- Keeps styling consistent with Material3
+- Centralizes shape/color/elevation/click in one composable
+- Easier to reuse and maintain
