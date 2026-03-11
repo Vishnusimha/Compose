@@ -1,4 +1,4 @@
-package com.vishnu.compose
+package com.vishnu.compose.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

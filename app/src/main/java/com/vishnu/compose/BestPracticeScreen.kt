@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -964,69 +963,72 @@ fun BoxLayoutSection() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
+                .padding(horizontal = 8.dp)
         ) {
-            // Background image placeholder
+            // Header background layer
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(140.dp)
                     .background(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
                                 Color(0xFFFF6B6B), // Coral Red
                                 Color(0xFFFFE66D) // Warm Yellow
                             )
-                        )
+                        ),
+                        shape = RoundedCornerShape(20.dp)
                     )
             )
 
-            // Profile card
+            // Main card sits below the header; top padding reserves overlap space for avatar.
             Card(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth(0.9f)
-                    .padding(bottom = 16.dp),
+                    .fillMaxWidth()
+                    .padding(top = 68.dp),
+                shape = RoundedCornerShape(20.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(top = 56.dp, bottom = 20.dp, start = 16.dp, end = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Avatar
-                    Surface(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .offset(y = (-40).dp),
-                        shape = CircleShape,
-                        color = Color(0xFF6200EE), // Deep Purple
-                        border = BorderStroke(4.dp, Color.White),
-                        shadowElevation = 8.dp
-                    ) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = null,
-                                modifier = Modifier.size(48.dp),
-                                tint = Color.White
-                            )
-                        }
-                    }
-
                     Text(
                         text = "John Doe",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "Android Developer",
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.Gray
+                    )
+                }
+            }
+
+            // Avatar is anchored at the overlap point between header and card.
+            Surface(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 24.dp)
+                    .size(88.dp),
+                shape = CircleShape,
+                color = Color(0xFF6200EE), // Deep Purple
+                border = BorderStroke(4.dp, Color.White),
+                shadowElevation = 8.dp
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp),
+                        tint = Color.White
                     )
                 }
             }
