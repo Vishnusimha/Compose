@@ -1,6 +1,7 @@
 package com.vishnu.compose.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -42,15 +44,61 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.vishnu.compose.ui.theme.ComposeTheme
 
 private data class ContentRow(
     val title: String,
     val posters: List<String>
 )
 
+private data class NetflixPalette(
+    val screenBackground: Color,
+    val topBarContainer: Color,
+    val topBarContent: Color,
+    val heroStart: Color,
+    val heroEnd: Color,
+    val heroTitle: Color,
+    val heroMeta: Color,
+    val primaryButtonContainer: Color,
+    val primaryButtonContent: Color,
+    val secondaryButtonContainer: Color,
+    val secondaryButtonContent: Color,
+    val categoryTitle: Color,
+    val cardContainer: Color,
+    val cardGradientStart: Color,
+    val cardGradientEnd: Color,
+    val cardTitle: Color
+)
+
+@Composable
+private fun rememberNetflixPalette(isDarkTheme: Boolean): NetflixPalette {
+    return remember(isDarkTheme) {
+        NetflixPalette(
+            screenBackground = if (isDarkTheme) Color(0xFF0B0B0B) else Color(0xFFFFFFFF), // Rich Black / White
+            topBarContainer = if (isDarkTheme) Color(0xFF0B0B0B) else Color(0xFFFFFFFF), // Rich Black / White
+            topBarContent = if (isDarkTheme) Color(0xFFFFFFFF) else Color(0xFF111111), // White / Near Black
+            heroStart = Color(0xFFB20710), // Netflix Red
+            heroEnd = Color(0xFF111111), // Near Black
+            heroTitle = Color(0xFFFFFFFF), // White
+            heroMeta = Color(0xFFE0E0E0), // Gray 300
+            primaryButtonContainer = Color(0xFFFFFFFF), // White
+            primaryButtonContent = Color(0xFF000000), // Black
+            secondaryButtonContainer = Color(0xFF2A2A2A), // Charcoal
+            secondaryButtonContent = Color(0xFFFFFFFF), // White
+            categoryTitle = if (isDarkTheme) Color(0xFFFFFFFF) else Color(0xFF111111), // White / Near Black
+            cardContainer = Color(0xFF161616), // Graphite Black
+            cardGradientStart = Color(0xFFB20710), // Netflix Red
+            cardGradientEnd = Color(0xFF1A1A1A), // Dark Gray
+            cardTitle = Color(0xFFFFFFFF) // White
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NetflixInspiredScreen() {
+    val isDarkTheme = isSystemInDarkTheme()
+    val palette = rememberNetflixPalette(isDarkTheme = isDarkTheme)
     val rows = remember {
         listOf(
             ContentRow(
@@ -72,15 +120,20 @@ fun NetflixInspiredScreen() {
         )
     }
 
-    Surface(color = Color(0xFF121212)) {
+    Surface(color = palette.screenBackground) {
         Scaffold(
-            containerColor = Color(0xFF121212),
+            containerColor = palette.screenBackground,
             topBar = {
                 TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = palette.topBarContainer,
+                        titleContentColor = palette.topBarContent,
+                        actionIconContentColor = palette.topBarContent
+                    ),
                     title = {
                         Text(
                             text = "StreamX",
-                            color = Color.White,
+                            color = palette.topBarContent,
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.ExtraBold
                         )
@@ -90,7 +143,7 @@ fun NetflixInspiredScreen() {
                             Icon(
                                 imageVector = Icons.Default.Notifications,
                                 contentDescription = "Notifications",
-                                tint = Color.White
+                                tint = palette.topBarContent
                             )
                         }
                     }
@@ -105,10 +158,10 @@ fun NetflixInspiredScreen() {
                 verticalArrangement = Arrangement.spacedBy(22.dp)
             ) {
                 item {
-                    HeroBanner()
+                    HeroBanner(palette = palette)
                 }
                 items(rows) { row ->
-                    CategoryRow(row)
+                    CategoryRow(row = row, palette = palette)
                 }
             }
         }
@@ -116,7 +169,7 @@ fun NetflixInspiredScreen() {
 }
 
 @Composable
-private fun HeroBanner() {
+private fun HeroBanner(palette: NetflixPalette) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -125,7 +178,7 @@ private fun HeroBanner() {
             .clip(RoundedCornerShape(20.dp))
             .background(
                 brush = Brush.verticalGradient(
-                    listOf(Color(0xFF5D1049), Color(0xFF1E1E1E))
+                    listOf(palette.heroStart, palette.heroEnd)
                 )
             )
             .padding(20.dp),
@@ -134,21 +187,21 @@ private fun HeroBanner() {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
                 text = "The Silent Case",
-                color = Color.White,
+                color = palette.heroTitle,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Crime • Thriller • 2h 08m",
-                color = Color(0xFFE0E0E0),
+                color = palette.heroMeta,
                 style = MaterialTheme.typography.bodyMedium
             )
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Button(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = Color.Black
+                        containerColor = palette.primaryButtonContainer,
+                        contentColor = palette.primaryButtonContent
                     )
                 ) {
                     Icon(imageVector = Icons.Default.PlayArrow, contentDescription = null)
@@ -157,7 +210,10 @@ private fun HeroBanner() {
                 }
                 Button(
                     onClick = { },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E2E2E))
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = palette.secondaryButtonContainer,
+                        contentColor = palette.secondaryButtonContent
+                    )
                 ) {
                     Text("My List")
                 }
@@ -167,11 +223,11 @@ private fun HeroBanner() {
 }
 
 @Composable
-private fun CategoryRow(row: ContentRow) {
+private fun CategoryRow(row: ContentRow, palette: NetflixPalette) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
             text = row.title,
-            color = Color.White,
+            color = palette.categoryTitle,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -181,25 +237,25 @@ private fun CategoryRow(row: ContentRow) {
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(row.posters) { title ->
-                PosterCard(title = title)
+                PosterCard(title = title, palette = palette)
             }
         }
     }
 }
 
 @Composable
-private fun PosterCard(title: String) {
+private fun PosterCard(title: String, palette: NetflixPalette) {
     Card(
         modifier = Modifier.size(width = 120.dp, height = 176.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1F1F1F))
+        colors = CardDefaults.cardColors(containerColor = palette.cardContainer)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
-                        listOf(Color(0xFF4A4A4A), Color(0xFF242424))
+                        listOf(palette.cardGradientStart, palette.cardGradientEnd)
                     )
                 )
                 .padding(10.dp),
@@ -207,7 +263,7 @@ private fun PosterCard(title: String) {
         ) {
             Text(
                 text = title,
-                color = Color.White,
+                color = palette.cardTitle,
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Medium
             )
@@ -215,9 +271,19 @@ private fun PosterCard(title: String) {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFF121212)
+@Preview(name = "Netflix Dark", showBackground = true, backgroundColor = 0xFF121212)
 @Composable
-private fun NetflixInspiredScreenPreview() {
-    NetflixInspiredScreen()
+private fun NetflixInspiredScreenDarkPreview() {
+    ComposeTheme(darkTheme = true, dynamicColor = false) {
+        NetflixInspiredScreen()
+    }
+}
+
+@Preview(name = "Netflix Light", showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun NetflixInspiredScreenLightPreview() {
+    ComposeTheme(darkTheme = false, dynamicColor = false) {
+        NetflixInspiredScreen()
+    }
 }
 
