@@ -1,4 +1,4 @@
-package com.vishnu.compose
+package com.vishnu.compose.presentation
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
