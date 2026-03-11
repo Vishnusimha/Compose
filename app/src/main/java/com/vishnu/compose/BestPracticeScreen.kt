@@ -285,32 +285,38 @@ fun TextComponentsSection() {
 
         // Text with ALL possible parameters and modifiers
         Text(
-            text = "Complete Text Example",
+            text = "Complete Text Example Complete Text Example Complete Text Example Complete Text Example",
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = Color(0xFFE3F2FD), //
+//                    color = Color(0xFFE3F2FD), //
+                    color = Color.Yellow, //
                     shape = RoundedCornerShape(8.dp)
                 )
                 .padding(horizontal = 16.dp, vertical = 12.dp)
                 .border(
                     width = 2.dp,
-                    color = Color(0xFF1976D2),
+//                    color = Color(0xFF1976D2),
+                    color = Color.Gray,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .clickable { /* Handle click */ }
                 .alpha(1f)
                 .shadow(elevation = 4.dp, shape = RoundedCornerShape(8.dp)),
-            color = Color(0xFF0D47A1),
+
+//            color = Color(0xFF0D47A1),
+            color = Color.Red,
             fontSize = 18.sp,
             fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Serif,
-            letterSpacing = 0.5.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = FontFamily.Cursive,
+//            letterSpacing = 0.5.sp,
+            letterSpacing = 2.sp,
             textDecoration = TextDecoration.Underline,
             textAlign = TextAlign.Center,
             lineHeight = 24.sp,
-            overflow = TextOverflow.Ellipsis,
+//            lineHeight = 64.sp,
+            overflow = TextOverflow.Ellipsis, // TextOverflow.Clip ,TextOverflow.Visible, .StartEllipsis, .MiddleEllipsis,
             softWrap = true,
             maxLines = 2,
             minLines = 1,
@@ -386,7 +392,7 @@ fun ButtonComponentsSection() {
                 disabledElevation = 0.dp
             ),
             border = BorderStroke(2.dp, Color(0xFF3700B3)),
-            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp) //?
         ) {
             Icon(
                 imageVector = Icons.Default.Favorite,
@@ -552,14 +558,15 @@ fun InputComponentsSection() {
                 .fillMaxWidth()
                 .shadow(elevation = 4.dp, shape = RoundedCornerShape(8.dp)),
             enabled = true,
-            readOnly = false,
+            readOnly = false, //?
             textStyle = TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black
             ),
-            label = { Text("Label") },
+            label = { Text("Label") }, // Just like hint in XML
             placeholder = { Text("Enter text here") },
+
             leadingIcon = {
                 Icon(Icons.Default.Search, contentDescription = null)
             },
@@ -568,8 +575,9 @@ fun InputComponentsSection() {
                     Icon(Icons.Default.Delete, contentDescription = "Clear")
                 }
             },
-            prefix = { Text("Prefix: ") },
-            suffix = { Text(" suffix") },
+
+            prefix = { Text("Prefix: ") }, //TODO add in detail comment
+            suffix = { Text(" suffix") }, // TODO add in detail comment
             supportingText = { Text("Supporting text goes here") },
             isError = false,
             singleLine = true,
@@ -594,6 +602,7 @@ fun InputComponentsSection() {
             label = { Text("Outlined TextField") },
             placeholder = { Text("Type something") },
             leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+//            trailingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
             singleLine = true
         )
     }
@@ -724,6 +733,7 @@ fun SelectionComponentsSection() {
                 valueRange = 0f..1f,
                 steps = 10,
                 onValueChangeFinished = { /* Called when user stops dragging */ },
+//                TODO explain each below SliderDefaults as simple as possible
                 colors = SliderDefaults.colors(
                     thumbColor = Color(0xFFE91E63),
                     activeTrackColor = Color(0xFFE91E63),
@@ -826,7 +836,7 @@ fun HorizontalScrollSection() {
                     Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
-                    ) {
+                    ) { // TODO WHy BOx here? , what we achieved, by using Box
                         Text(
                             text = "Item ${index + 1}",
                             color = Color.White,
