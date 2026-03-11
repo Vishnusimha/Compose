@@ -134,6 +134,10 @@ fun NetflixInspiredScreen() {
     val rows = remember {
         listOf(
             ContentRow(
+                "Continue Watching",
+                listOf("North Light", "8th Floor", "The Last Port", "Unknown Call")
+            ),
+            ContentRow(
                 "Trending Now",
                 listOf("Reckoning", "Skyline", "Parallel", "The Loop", "Dark River")
             ),
@@ -144,10 +148,6 @@ fun NetflixInspiredScreen() {
             ContentRow(
                 "Sci-Fi Picks",
                 listOf("Orbit", "Neon City", "Beyond", "Zero Day", "Stellar")
-            ),
-            ContentRow(
-                "Continue Watching",
-                listOf("North Light", "8th Floor", "The Last Port", "Unknown Call")
             )
         )
     }
