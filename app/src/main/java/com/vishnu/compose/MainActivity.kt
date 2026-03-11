@@ -9,6 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.vishnu.compose.presentation.BestPracticeScreen
+import com.vishnu.compose.presentation.NetflixInspiredScreen
+import com.vishnu.compose.presentation.PinterestInspiredScreen
+import com.vishnu.compose.presentation.SpotifyInspiredScreen
 import com.vishnu.compose.ui.theme.ComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +20,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeTheme {
-                BestPracticeScreen()
+//                BestPracticeScreen()
+//                NetflixInspiredScreen()
+//                SpotifyInspiredScreen()
+                PinterestInspiredScreen()
             }
         }
     }
