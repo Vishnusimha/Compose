@@ -60,12 +60,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -408,34 +409,102 @@ fun UnusedComponentsShowcaseScreen() {
             item { ShowcaseDivider() }
 
             item {
-                // Vertical carousel fallback: vertical card list to mimic browse experience.
+                // Vertical carousel fallback: emulate carousel focus + peeking cards.
                 ShowcaseSectionHeader(
                     title = "VerticalMultiBrowseCarousel (Fallback)",
                     what = "Vertical browse pattern fallback section.",
-                    check = "Scroll stacked cards vertically."
+                    check = "Use Previous/Next and observe center focus with top/bottom peeks."
                 )
+
+                var verticalCarouselIndex by remember { mutableStateOf(0) }
+                val previousIndex =
+                    (verticalCarouselIndex - 1 + showcaseCards.size) % showcaseCards.size
+                val nextIndex = (verticalCarouselIndex + 1) % showcaseCards.size
 
                 Text(
                     "VerticalMultiBrowseCarousel (fallback demo)",
                     style = MaterialTheme.typography.labelLarge
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "${verticalCarouselIndex + 1} of ${showcaseCards.size}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(10.dp))
 
-                showcaseCards.forEachIndexed { index, label ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(horizontal = 10.dp, vertical = 8.dp)
+                ) {
+                    VerticalCarouselPeekCard(
+                        label = showcaseCards[previousIndex],
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .fillMaxWidth()
+                            .height(78.dp)
+                            .graphicsLayer {
+                                alpha = 0.45f
+                                scaleX = 0.94f
+                                scaleY = 0.94f
+                            }
+                    )
+
                     Card(
                         modifier = Modifier
+                            .align(Alignment.Center)
                             .fillMaxWidth()
-                            .height(90.dp)
-                            .padding(bottom = 8.dp)
+                            .height(108.dp)
                     ) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.primaryContainer),
+                                .background(MaterialTheme.colorScheme.primaryContainer)
+                                .padding(horizontal = 14.dp),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("${index + 1}. $label")
+                            Text(
+                                text = showcaseCards[verticalCarouselIndex],
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold
+                            )
                         }
+                    }
+
+                    VerticalCarouselPeekCard(
+                        label = showcaseCards[nextIndex],
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .fillMaxWidth()
+                            .height(78.dp)
+                            .graphicsLayer {
+                                alpha = 0.45f
+                                scaleX = 0.94f
+                                scaleY = 0.94f
+                            }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Button(
+                        onClick = {
+                            verticalCarouselIndex =
+                                (verticalCarouselIndex - 1 + showcaseCards.size) % showcaseCards.size
+                        }
+                    ) {
+                        Text("Previous")
+                    }
+                    Button(
+                        onClick = {
+                            verticalCarouselIndex =
+                                (verticalCarouselIndex + 1) % showcaseCards.size
+                        }
+                    ) {
+                        Text("Next")
                     }
                 }
             }
@@ -512,5 +581,27 @@ private fun ShowcaseSectionHeader(
         color = MaterialTheme.colorScheme.primary
     )
     Spacer(modifier = Modifier.height(4.dp))
+}
+
+@Composable
+private fun VerticalCarouselPeekCard(
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .padding(horizontal = 14.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        }
+    }
 }
 
