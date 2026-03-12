@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -67,6 +68,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SecureTextField
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
@@ -278,6 +280,8 @@ fun BestPracticeScreen() {
 // ============================================
 @Composable
 fun TextComponentsSection() {
+    val passwordState = rememberTextFieldState("Pass@1234")
+
     SectionContainer(title = "Text Components") {
 
         // Basic Text
@@ -362,6 +366,15 @@ fun TextComponentsSection() {
         Text(
             text = "Label Small",
             style = MaterialTheme.typography.labelSmall
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Secure Text Field
+        SecureTextField(
+            state = passwordState,
+            label = { Text("Secure password") },
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
