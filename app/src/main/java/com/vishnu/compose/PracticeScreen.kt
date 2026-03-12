@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +21,7 @@ import androidx.compose.ui.unit.sp
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileScreen() {
+fun PracticeScreen() {
     // if we do like this all render on top of each other, to fix we must use column or ROW.
 //    Spacer(modifier = Modifier.padding(8.dp))
 //
@@ -53,6 +56,12 @@ fun ProfileScreen() {
         items(10) {
 
         }
+    }
+
+    val num = remember { mutableIntStateOf(0) }
+
+    Button(modifier = Modifier.padding(16.dp), onClick = { num.intValue++ }) {
+        Text("Click To increment")
     }
 
 }
