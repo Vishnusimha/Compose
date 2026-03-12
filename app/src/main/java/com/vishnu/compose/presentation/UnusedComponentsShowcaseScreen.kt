@@ -381,13 +381,16 @@ fun UnusedComponentsShowcaseScreen() {
                     what = "Material carousel for horizontal card browsing.",
                     check = "Swipe cards left/right."
                 )
+
                 val carouselState = rememberCarouselState { showcaseCards.size }
+
                 HorizontalMultiBrowseCarousel(
                     state = carouselState,
                     preferredItemWidth = 170.dp,
                     itemSpacing = 10.dp,
                     contentPadding = PaddingValues(horizontal = 4.dp)
                 ) { index ->
+
                     Card(modifier = Modifier.height(120.dp)) {
                         Box(
                             modifier = Modifier
@@ -398,6 +401,7 @@ fun UnusedComponentsShowcaseScreen() {
                             Text(showcaseCards[index])
                         }
                     }
+
                 }
             }
 
@@ -410,11 +414,13 @@ fun UnusedComponentsShowcaseScreen() {
                     what = "Vertical browse pattern fallback section.",
                     check = "Scroll stacked cards vertically."
                 )
+
                 Text(
                     "VerticalMultiBrowseCarousel (fallback demo)",
                     style = MaterialTheme.typography.labelLarge
                 )
                 Spacer(modifier = Modifier.height(8.dp))
+
                 showcaseCards.forEachIndexed { index, label ->
                     Card(
                         modifier = Modifier
