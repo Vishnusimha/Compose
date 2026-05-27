@@ -16,6 +16,7 @@ on:
       - develop
       - main
       - 'release/**'
+
 jobs:
   android-ci:
     name: Build, Test and Lint Android App
