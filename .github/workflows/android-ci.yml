@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - main
+      - 'release/**'
     types:
       - opened
       - synchronize
@@ -14,7 +15,7 @@ on:
     branches:
       - develop
       - main
-
+      - 'release/**'
 jobs:
   android-ci:
     name: Build, Test and Lint Android App
