@@ -22,6 +22,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            // Only enable this later if you run emulator/instrumentation tests in CI
+            // enableAndroidTestCoverage = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
